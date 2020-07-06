@@ -39,7 +39,7 @@ Mas, qual seria a melhor maneira possível? E é justamente por isso que precisa
 
 Durante muito tempo, eu, como desenvolvedor, sempre quis codificar da melhor maneira possível, desde o princípio da aplicação. Sempre quis que tudo tivesse um desempenho incrível assim que saísse do forno. E quem nunca? Mas, justamente pela questão das métricas, não se pode colocar a carroça na frente dos bois.
 
-A otimização precoce também é um grande problema. Como otimizar o que não sabemos que precisa ser otimizado? O React é uma lib extremamente performática, então na maioria das vezes o custo de se querer fazer alguma otimização é maior do que o benefício que ela trará. **E isso também precisa ser mensurado**.
+A otimização precoce também é um grande problema. Como otimizar o que não sabemos que precisa ser otimizado? O React é uma lib extremamente performática, então em alguns momentos o custo de se querer fazer alguma otimização é maior do que o benefício que ela trará. **E isso também precisa ser mensurado**.
 
 Isso eu também descobri com o tempo, apesar de ainda me afetar um pouco:
 > A quantidade de vezes que um componente renderiza não é um problema!
@@ -50,7 +50,7 @@ https://kentcdodds.com/blog/fix-the-slow-render-before-you-fix-the-re-render
 https://kentcdodds.com/blog/usememo-and-usecallback
 https://github.com/kentcdodds/react-performance (_nos exercícios desse workshop tem vários exemplos e explicações sobre o tema_)
 
-Nos meus estudos, cheguei a um conceito de perfomance fácil de classificar e entender, que é dividido em dois tipos: **objetiva** e **subjetiva**
+Nos meus estudos, cheguei a um conceito de perfomance fácil de classificar, entender, e mensurar, que é dividido em dois tipos: **objetiva** e **subjetiva**
 
 ### Objetiva (mensurável)
 A performance objetiva é todo dado que pode ser mensurado de forma clara e precisa:
@@ -74,9 +74,46 @@ https://reactjs.org/docs/concurrent-mode-patterns.html#the-three-steps
 
 ## APIs do React
 
-> Roteiro: conceituar as apis citadas acima e construir exemplos de uso, junto com o projeto já feito.
+Os react hooks são uma nova funcionalidade incluída na versão 16.8 do react. Eles permitem que a gente tenha acesso ao estado e ao ciclo de vida do componente, sem que seja preciso utilizar uma classe, reduzindo a verbosidade e complexidade do código. 
+
+### useCallback
+
+O hook useCallback recebe uma função e um array de dependências. O retorno é uma versão memoizada da função, que só vai ser alterada caso alguma dependência do array mude.
+
+```JavaScript
+const memoizedCallback = useCallback(
+  () => {
+    doSomething(a, b);
+  },
+  [a, b],
+);
+```
+
+É importante notar que uma função memoizada também irá guardar as referências de todas as dependências, o que significa que podemos ter valores desatualizados se eles não forem referenciados no array de dependências.
+
+> Colocar exemplos de useCallback
+
+https://kentcdodds.com/blog/usememo-and-usecallback
+
+### useMemo
+
+O hook useMemo é muito semelhante ao useCallback, a diferença é que o useMemo permite a memoização de qualquer tipo de valor, não apenas funções. O hook é usado para memoizar o retorno de uma função.
+
+```JavaScript
+useCallback(fn, deps) is equivalent to useMemo(() => fn, deps).
+```
+
+> Colocar exemplos de useMemo
 
 ## Uncontrolled Components
+
+A forma tradicional de se construir formulários com React é guardar em um estado os valores dos componentes, com um handler para o evento onChange.
+
+Existem algumas vantagens de se usar componentes controlados, pelo fato de termos acesso imediato aos valores dos campos, como por exemplo validação instantânea dos campos e desabilitar condicionalmente o botão de submit.
+
+No caso dos componentes não controlados, é o próprio DOM o responsável por gerenciar o valor do input, o React passa a ter acesso a esse input através de uma referência.
+
+Dependendo da situação é mais vantajoso se utilizar componentes não controlados. Imagine um cenário onde temos uma lista com 1000 inputs (uma lista com checkboxes), se guardarmos o value em um estado, cada vez que eu alterar um desses checkboxes, a lista inteira será renderizada novamente. Se multiplicarmos isso por um grande número de componentes, o lag será instaurado!
 
 > Roteiro: conceituar uncontrolled components, diferença para controlled components, exemplificar.
 
@@ -85,6 +122,8 @@ https://reactjs.org/docs/concurrent-mode-patterns.html#the-three-steps
 > Roteiro: o grande "tcharam" da apresentação. Conceituar, exemplificar e mostrar o componente.
 
 ## Otimizações
+
+Google Analytics
 
 > Roteiro: dar alguns exemplos de ferramentas que podem ser utilizadas para mensurar a performance, assim como dicas de otimização.
 
