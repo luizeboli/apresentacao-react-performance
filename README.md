@@ -3,6 +3,7 @@
 O intuito da apresentação é explicar alguns conceitos e como podemos mensurar e identificar problemas de performance.
 
 Posso dividir entre 3 objetivos:
+
 1. Fixar meus conhecimentos, pois a melhor maneira de assimiliar informação nova é explicando para alguém, ou alguma coisa.
 2. Trazer um conteúdo introdutório-básico-intermediário que possa agregar aos novos integrantes da Hi (estagiários e fronts mais juniores).
 3. Abrir uma discussão sobre o tema para melhorarmos nossa qualidade não só como desenvolvedores mas também dos produtos em que nos envolvemos.
@@ -10,13 +11,13 @@ Posso dividir entre 3 objetivos:
 Basicamente iremos falar sobre:
 
 1. APIs do react:
-1.1. useCallback;
-1.2. useMemo;
-1.3. useLayoutEffect;
-1.4. React.memo;
-1.5. Suspense;
-⋅⋅1.5.1. Lazy
-⋅⋅1.5.2. Data fetching
+   1.1. useCallback;
+   1.2. useMemo;
+   1.3. useLayoutEffect;
+   1.4. React.memo;
+   1.5. Suspense;
+   ⋅⋅1.5.1. Lazy
+   ⋅⋅1.5.2. Data fetching
 2. Uncontrolled Components
 3. Listas Virtualizadas
 
@@ -26,9 +27,9 @@ Basicamente iremos falar sobre:
 
 > Performance: sinônimo de desempenho. Palavra inglesa, com origem francesa, usada para referenciar artistas (dança e etc)
 
-Se pesquisarmos no google o significado da palavra desempenho, veremos algumas definições interessantes: 
+Se pesquisarmos no google o significado da palavra desempenho, veremos algumas definições interessantes:
 
-1. Cumprimento de obrigação ou de promessa, 
+1. Cumprimento de obrigação ou de promessa,
 2. Modo como alguém ou alguma coisa se comporta tendo em conta sua eficiência, seu rendimento: o desempenho de uma gestão, de um cantor ou atleta. (_aparentemente é a definição do dicionário, espero que seja mesmo_)
 
 Vemos que o termo é um tanto subjetivo e aberto para interpretações, pode significar muitas coisas, como pode significar nada, dependendo do contexto em que for aplicado.
@@ -42,6 +43,7 @@ Durante muito tempo, eu, como desenvolvedor, sempre quis codificar da melhor man
 A otimização precoce também é um grande problema. Como otimizar o que não sabemos que precisa ser otimizado? O React é uma lib extremamente performática, então em alguns momentos o custo de se querer fazer alguma otimização é maior do que o benefício que ela trará. **E isso também precisa ser mensurado**.
 
 Isso eu também descobri com o tempo, apesar de ainda me afetar um pouco:
+
 > A quantidade de vezes que um componente renderiza não é um problema!
 
 Ciclo de renderização, commits, updates, como o React enxerga e trata um elemento do DOM (que na verdade é um objeto \o/) são assuntos que dariam algumas horas de discussão, como não temos todo esse tempo disponível, vou deixar alguns links do nosso querido KCD, onde ele explica de forma mais aprofundada.
@@ -53,14 +55,15 @@ https://github.com/kentcdodds/react-performance (_nos exercícios desse workshop
 Nos meus estudos, cheguei a um conceito de perfomance fácil de classificar, entender, e mensurar, que é dividido em dois tipos: **objetiva** e **subjetiva**
 
 ### Objetiva (mensurável)
+
 A performance objetiva é todo dado que pode ser mensurado de forma clara e precisa:
 
 1. Tamanho do bundle;
 2. Tempo de processamento da requisição;
-4. Tempo de processamento das ações em massa;
-5. Quantidade de itens renderizados em uma lista;
-6. TTFB - Time to first byte (quanto tempo demora para que o primeiro byte seja baixado pelo navegador)
-7. TTR - Time to render (quanto tempo o browser demora pra renderizar a aplicação)
+3. Tempo de processamento das ações em massa;
+4. Quantidade de itens renderizados em uma lista;
+5. TTFB - Time to first byte (quanto tempo demora para que o primeiro byte seja baixado pelo navegador)
+6. TTR - Time to render (quanto tempo o browser demora pra renderizar a aplicação)
 
 ### Subjetiva (perceptível)
 
@@ -74,7 +77,7 @@ https://reactjs.org/docs/concurrent-mode-patterns.html#the-three-steps
 
 ## APIs do React
 
-Os react hooks são uma nova funcionalidade incluída na versão 16.8 do react. Eles permitem que a gente tenha acesso ao estado e ao ciclo de vida do componente, sem que seja preciso utilizar uma classe, reduzindo a verbosidade e complexidade do código. 
+Os react hooks são uma nova funcionalidade incluída na versão 16.8 do react. Eles permitem que a gente tenha acesso ao estado e ao ciclo de vida do componente, sem que seja preciso utilizar uma classe, reduzindo a verbosidade e complexidade do código.
 
 ### useCallback
 
@@ -119,6 +122,34 @@ Dependendo da situação é mais vantajoso se utilizar componentes não controla
 
 ## Listas Virtualizadas
 
+Virtualização é um processo, onde através do software é criada uma representação de aplicativos, servidores, sistemas operacionais, redes e armazenamento.
+
+É uma maneira de reduzir custos de TI ao mesmo tempo em que aumenta a eficiência e agilidade, que estão ligados diretamente à performance.
+
+As listas virtualizadas permitem que tenhamos infinitos elementos em um lista, e apenas o que é exibido na tela será de fato renderizado no DOM.
+
+Essa foto representa bem o que ocorre em um cenário convencional. Temos uma lista, renderizada por inteiro no DOM, porém apenas uma parte dela é vista pelo usuário.
+
+Na maioria dos casos não há problemas em se trabalhar dessa forma, mas quando falamos de uma grande quantidade de elementos, como por exemplo o feed do twitter, um histórico de chat ou uma lista com infinite scrolling, podemos ter problemas principalmente em devices low-mid-end,o que pode afetar a experiência sobre a plataforma.
+
+Alguns problemas:
+
+- Aumento do tempo de renderização.
+- Queda de fps
+- Alto consumo de ram
+
+![Non Virtualized](https://i.imgur.com/MlCPfl1.png)
+
+Essa próxima foto ilustra o comportamento de uma lista virtualizada, diferentemente do outro exemplo, aqui apenas os elementos visíveis são renderizados. Quando damos scroll no container, os elementos são substituídos programaticamente.
+
+![Virtualized](https://i.imgur.com/FTMppSV.png)
+
+Existem algumas maneiras de se implementar uma lista virtualizada, podemos posicionar os elementos de forma absoluta no container, podemos posicionar de acordo com a altura dos itens, empilhar no container e etc...
+
+> Ver intersection observer
+
+> **Viewport**: porção visível da lista, da tela, do container...
+
 > Roteiro: o grande "tcharam" da apresentação. Conceituar, exemplificar e mostrar o componente.
 
 ## Otimizações
@@ -128,6 +159,7 @@ Google Analytics
 > Roteiro: dar alguns exemplos de ferramentas que podem ser utilizadas para mensurar a performance, assim como dicas de otimização.
 
 ## ETC...
+
 ![Dan Abramov Tweet](https://i.imgur.com/4UKcuRP.png)
 
 [React shallow equality function](https://github.com/facebook/react/blob/v16.8.6/packages/shared/shallowEqual.js)
@@ -135,4 +167,3 @@ Google Analytics
 > Falar do Profiler do React e sua api de tracing (experimental), o quanto pode ser interessante para mensurar timings (o que o Wesley está fazendo através do GA)
 
 > Falar sobre o unused webpack plugin
-
