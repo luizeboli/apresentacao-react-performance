@@ -21,7 +21,7 @@ Basicamente iremos falar sobre:
 2. Uncontrolled Components
 3. Listas Virtualizadas
 
-> Roteiro: introduzir a apresentação e separar por tópicos o conteúdo que será visto. Será baseada nos conceitos vistos no objetivo do acompanhamento de carreira.
+> O conteúdo visto durante a apresentação é resultado dos estudos do acompanhamento de carreira.
 
 ## O que é performance (desempenho)?
 
@@ -34,13 +34,13 @@ Se pesquisarmos no google o significado da palavra desempenho, veremos algumas d
 
 Vemos que o termo é um tanto subjetivo e aberto para interpretações, pode significar muitas coisas, como pode significar nada, dependendo do contexto em que for aplicado.
 
-Pensando no item 1: De forma simplificada, o papel do Inbox é prover um meio para que seus usuários prestem suporte aos consumidores finais. Essa é a obrigação, ou promessa do produto, e é claro que queremos fazer isso da **melhor** maneira possível, certo?
+Pensando no item 1: De forma simplificada, o papel do Inbox é prover um meio para que seus usuários prestem suporte aos consumidores finais (é um produto B2B, dã). Essa é a obrigação, ou promessa do produto, e é claro que queremos fazer isso da **melhor** maneira possível, certo?
 
 Mas, qual seria a melhor maneira possível? E é justamente por isso que precisamos ter métricas e indicadores, além de ter rastreabilidade sobre eles. Se não, como ter certeza de que tivemos algum avanço?
 
-Durante muito tempo, eu, como desenvolvedor, sempre quis codificar da melhor maneira possível, desde o princípio da aplicação. Sempre quis que tudo tivesse um desempenho incrível assim que saísse do forno. E quem nunca? Mas, justamente pela questão das métricas, não se pode colocar a carroça na frente dos bois.
+Durante muito tempo, eu, como desenvolvedor, sempre quis codificar da melhor maneira possível, desde o princípio da aplicação. Sempre quis que tudo tivesse um desempenho incrível assim que saísse do forno. E quem nunca? Mas, justamente pela questão das métricas, dos indicadores e da rastreabilidade, não se pode colocar a carroça na frente dos bois.
 
-A otimização precoce também é um grande problema. Como otimizar o que não sabemos que precisa ser otimizado? O React é uma lib extremamente performática, então em alguns momentos o custo de se querer fazer alguma otimização é maior do que o benefício que ela trará. **E isso também precisa ser mensurado**.
+A otimização precoce também é um grande problema. Como otimizar o que não sabemos que precisa ser otimizado? O React é uma lib extremamente performática, precisamos pensar também, se o custo de se querer fazer alguma otimização será maior do que o benefício que ela trará. **E isso também precisa ser mensurado**.
 
 Isso eu também descobri com o tempo, apesar de ainda me afetar um pouco:
 
@@ -49,7 +49,6 @@ Isso eu também descobri com o tempo, apesar de ainda me afetar um pouco:
 Ciclo de renderização, commits, updates, como o React enxerga e trata um elemento do DOM (que na verdade é um objeto \o/) são assuntos que dariam algumas horas de discussão, como não temos todo esse tempo disponível, vou deixar alguns links do nosso querido KCD, onde ele explica de forma mais aprofundada.
 
 https://kentcdodds.com/blog/fix-the-slow-render-before-you-fix-the-re-render
-https://kentcdodds.com/blog/usememo-and-usecallback
 https://github.com/kentcdodds/react-performance (_nos exercícios desse workshop tem vários exemplos e explicações sobre o tema_)
 
 Nos meus estudos, cheguei a um conceito de perfomance fácil de classificar, entender, e mensurar, que é dividido em dois tipos: **objetiva** e **subjetiva**
@@ -77,7 +76,15 @@ https://reactjs.org/docs/concurrent-mode-patterns.html#the-three-steps
 
 ## APIs do React
 
-Os react hooks são uma nova funcionalidade incluída na versão 16.8 do react. Eles permitem que a gente tenha acesso ao estado e ao ciclo de vida do componente, sem que seja preciso utilizar uma classe, reduzindo a verbosidade e complexidade do código.
+Os react hooks são uma "nova funcionalidade" incluída na versão 16.8 do react. Eles permitem que a gente tenha acesso ao estado e ao ciclo de vida do componente, sem que seja preciso utilizar uma classe, reduzindo a verbosidade e complexidade do código.
+
+<<<<<<< Updated upstream
+> Facilitar o uso de HOCs, estado, ciclo de vida.
+=======
+> HOCs, estado, ciclo de vida.
+>>>>>>> Stashed changes
+
+https://kentcdodds.com/blog/usememo-and-usecallback
 
 ### useCallback
 
@@ -92,21 +99,27 @@ const memoizedCallback = useCallback(
 );
 ```
 
-É importante notar que uma função memoizada também irá guardar as referências de todas as dependências, o que significa que podemos ter valores desatualizados se eles não forem referenciados no array de dependências.
+É importante notar que uma função memoizada também irá guardar as referências de todas as dependências, o que significa que podemos ter valores desatualizados se eles não forem referenciados no array de dependências. (exemplo)
 
-> Colocar exemplos de useCallback
+É interessante usar esse hook quando a função é uma dependência de algum componente (pra manter o shouldComponentUpdate ou replicar seu funcionamento), ou de algum hook, como por exemplo o useEffect, pois o problema que o useCallback resolve é justamente a igualdade de referência das funções e objetos.
+
+> Exemplo do useCallback: https://codesandbox.io/s/simple-callback-9qllj
 
 https://kentcdodds.com/blog/usememo-and-usecallback
+https://dmitripavlutin.com/dont-overuse-react-usecallback/
+https://www.reddit.com/r/reactjs/comments/efjgfc/should_i_use_usecallback_in_every_function/
 
 ### useMemo
 
 O hook useMemo é muito semelhante ao useCallback, a diferença é que o useMemo permite a memoização de qualquer tipo de valor, não apenas funções. O hook é usado para memoizar o retorno de uma função.
 
 ```JavaScript
-useCallback(fn, deps) is equivalent to useMemo(() => fn, deps).
+useCallback(fn, deps) é equivalente a useMemo(() => fn, deps).
 ```
 
-> Colocar exemplos de useMemo
+Podemos também, por exemplo, ter uma lista de erros memoizada, que será alterada mediante X condição (um state de error por exemplo)
+
+> Exemplo do useMemo: https://codesandbox.io/s/primes-use-memo-xusrv
 
 ## Uncontrolled Components
 
