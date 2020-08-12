@@ -48,9 +48,6 @@ Isso eu também descobri com o tempo, apesar de ainda me afetar um pouco:
 
 Ciclo de renderização, commits, updates, como o React enxerga e trata um elemento do DOM (que na verdade é um objeto \o/) são assuntos que dariam algumas horas de discussão, como não temos todo esse tempo disponível, vou deixar alguns links do nosso querido KCD, onde ele explica de forma mais aprofundada.
 
-https://kentcdodds.com/blog/fix-the-slow-render-before-you-fix-the-re-render
-https://github.com/kentcdodds/react-performance (_nos exercícios desse workshop tem vários exemplos e explicações sobre o tema_)
-
 Nos meus estudos, cheguei a um conceito de perfomance fácil de classificar, entender, e mensurar, que é dividido em dois tipos: **objetiva** e **subjetiva**
 
 ### Objetiva (mensurável)
@@ -72,15 +69,11 @@ A performance subjetiva depende da percepção do usuário, que baseado na usabi
 2. Estado de carregamento da aplicação. Se carrega tudo de uma vez, ou por partes.
 3. Quanto tempo a tela fica no estado de carregando
 
-https://reactjs.org/docs/concurrent-mode-patterns.html#the-three-steps
-
 ## APIs do React
 
 Os react hooks são uma "nova funcionalidade" incluída na versão 16.8 do react. Eles permitem que a gente tenha acesso ao estado e ao ciclo de vida do componente, sem que seja preciso utilizar uma classe, reduzindo a verbosidade e complexidade do código.
 
 > Facilitar o uso de HOCs, estado, ciclo de vida.
-
-https://kentcdodds.com/blog/usememo-and-usecallback
 
 ### useCallback
 
@@ -100,10 +93,6 @@ const memoizedCallback = useCallback(
 É interessante usar esse hook quando a função é uma dependência de algum componente (pra manter o shouldComponentUpdate ou replicar seu funcionamento), ou de algum hook, como por exemplo o useEffect, pois o problema que o useCallback resolve é justamente a igualdade de referência das funções e objetos.
 
 > Exemplo do useCallback: https://codesandbox.io/s/simple-callback-9qllj
-
-https://kentcdodds.com/blog/usememo-and-usecallback
-https://dmitripavlutin.com/dont-overuse-react-usecallback/
-https://www.reddit.com/r/reactjs/comments/efjgfc/should_i_use_usecallback_in_every_function/
 
 ### useMemo
 
@@ -131,8 +120,6 @@ Como o useEffect é executado de forma assíncrona e após o browser renderizar 
 
 > Exemplo do useLayoutEffect: https://codesandbox.io/s/use-layout-effect-gp14t
 
-https://kentcdodds.com/blog/useeffect-vs-uselayouteffect
-
 ### React.memo
 
 O conceito do React.memo é semelhante aos hooks useCallback e useMemo: **memoização**, é utilizado para memoizar componentes baseado nas suas propriedades, ele veio para substituir o shouldComponentUpdate. Por padrão, o memo faz apenas um shallow compare de objetos complexos, porém é possível passar como segundo parâmetro, uma função que recebe como parâmetro as propriedades anteriores e as atuais, e então podemos fazer uma verificação personalizada. O retorno dessa função é true caso as propriedades sejam iguais, o que significa que o componente não será renderizado novamente, e false, caso sejam diferentes, o que irá fazer com que o componente renderize.
@@ -148,11 +135,6 @@ Importante mencionar que apesar de parecer uma solução milagrosa, não é semp
 Se o componente atualiza frequentemente com novas props, ou se **o custo da memoização não paga o custo da renderização**, será desnecessário utilizar o React.memo.
 
 ![Dan Abramov Tweet](https://i.imgur.com/4UKcuRP.png)
-
-https://dmitripavlutin.com/use-react-memo-wisely/
-https://github.com/facebook/react/issues/14463
-https://github.com/facebook/react/blob/master/packages/shared/shallowEqual.js
-https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/is
 
 > Importante notar que o React.memo memoiza apenas as propriedades, e não o estado/context do componente.
 
@@ -182,10 +164,6 @@ Já nesse print, vemos que o bundle se concentra no arquivo main.chunk.js
 
 ![Non Splitted](https://imgur.com/Y8rfAWI.png)
 
-https://dev.to/thekashey/code-splitting-what-when-and-why-59op
-https://itnext.io/what-the-heck-is-this-in-react-suspense-c5e641e487a
-https://medium.com/hackernoon/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d
-
 #### Suspense for data fetching
 
 Como dito anteriormente, o único caso de uso do Suspense atualmente é para lazy load de componentes, porém, o modo concurrent do React introduziu uma feature chamada Suspense for Data Fetching, que permite suspender o componente para qualquer tipo de dado que seja consultado de forma assíncrona.
@@ -208,9 +186,6 @@ Com o Suspense, agora temos o render-as-you-fetch: o componente é renderizado e
 Podemos falar muito sobre o Suspense, mas para não estender, vou deixar o link da própria documentação, que explica com detalhes todo o funcionamento do Suspense no modo concurrent
 
 > Exemplo legal: https://codesandbox.io/s/condescending-shape-s6694
-
-https://reactjs.org/docs/concurrent-mode-patterns.html
-https://reactjs.org/docs/concurrent-mode-suspense.html
 
 ## Uncontrolled Components
 
@@ -295,14 +270,31 @@ Isso significa:
 
 Google Analytics
 
-https://www.npmjs.com/package/unused-files-webpack-plugin
-https://www.npmjs.com/package/unused-webpack-plugin
-
-https://reactjs.org/docs/profiler.html
-
 > Roteiro: dar alguns exemplos de ferramentas que podem ser utilizadas para mensurar a performance, assim como dicas de otimização.
 
 > Falar do Profiler do React e sua api de tracing (experimental), o quanto pode ser interessante para mensurar timings (o que o Wesley está fazendo através do GA)
+
+## Links
+
+Links utilizados como referência para a construção e estudo do tema.
+
+[Fix the slow render before you fix the re-render](https://kentcdodds.com/blog/fix-the-slow-render-before-you-fix-the-re-render)
+[React Performance Workshop - Kent C Dodds](https://github.com/kentcdodds/react-performance) (_nos exercícios desse workshop tem vários exemplos e explicações sobre o tema_)
+[Concurrent mode patterns - The three steps](https://reactjs.org/docs/concurrent-mode-patterns.html#the-three-steps)
+[useMemo and useCallback](https://kentcdodds.com/blog/usememo-and-usecallback)
+[Dont' overuse react useCallback](https://dmitripavlutin.com/dont-overuse-react-usecallback/)
+[Should I use useCallback in every function declared inside a functional component?](https://www.reddit.com/r/reactjs/comments/efjgfc/)
+[useEffect vs useLayoutEffect](https://kentcdodds.com/blog/useeffect-vs-uselayouteffect)
+[use React.memo wisely](https://dmitripavlutin.com/use-react-memo-wisely/)
+[Q: When should you NOT use React memo?](https://github.com/facebook/react/issues/14463)
+[shallowEqual function](https://github.com/facebook/react/blob/master/packages/shared/shallowEqual.js)
+[Code splitting - What, When and Why](https://dev.to/thekashey/code-splitting-what-when-and-why-59op)
+[What the heck is this in React ? 🥁🥁(Suspense)](https://itnext.io/what-the-heck-is-this-in-react-suspense-c5e641e487a)
+[Lazy loading (and preloading) components in React 16.6](https://medium.com/hackernoon/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d)
+[Concurrent mode - Suspense](https://reactjs.org/docs/concurrent-mode-suspense.html)
+[Unused files webpack plugin](https://www.npmjs.com/package/unused-files-webpack-plugin)
+[Unused webpack plugin](https://www.npmjs.com/package/unused-webpack-plugin)
+[React Profiler](https://reactjs.org/docs/profiler.html)
 
 ## ETC...
 
