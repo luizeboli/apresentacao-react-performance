@@ -1,3 +1,4 @@
+![Language badge](https://img.shields.io/badge/Language-PT--BR-blue)
 # React: Aplicações mais performáticas, menos problemáticas.
 
 O intuito da apresentação é explicar alguns conceitos e como podemos mensurar e identificar problemas de performance.
@@ -11,13 +12,13 @@ Posso dividir entre 3 objetivos:
 Basicamente iremos falar sobre:
 
 1. APIs do react:
-   1.1. useCallback;
-   1.2. useMemo;
-   1.3. useLayoutEffect;
-   1.4. React.memo;
-   1.5. Suspense;
-   ⋅⋅1.5.1. Lazy
-   ⋅⋅1.5.2. Data fetching
+* useCallback;
+* useMemo;
+* useLayoutEffect;
+* React.memo;
+* Suspense:
+* Lazy
+* Data fetching
 2. Uncontrolled Components
 3. Listas Virtualizadas
 
@@ -277,19 +278,35 @@ Isso significa:
 Links utilizados como referência para a construção e estudo do tema.
 
 [Fix the slow render before you fix the re-render](https://kentcdodds.com/blog/fix-the-slow-render-before-you-fix-the-re-render)
+
 [React Performance Workshop - Kent C Dodds](https://github.com/kentcdodds/react-performance) (_nos exercícios desse workshop tem vários exemplos e explicações sobre o tema_)
+
 [Concurrent mode patterns - The three steps](https://reactjs.org/docs/concurrent-mode-patterns.html#the-three-steps)
+
 [useMemo and useCallback](https://kentcdodds.com/blog/usememo-and-usecallback)
+
 [Dont' overuse react useCallback](https://dmitripavlutin.com/dont-overuse-react-usecallback/)
+
 [Should I use useCallback in every function declared inside a functional component?](https://www.reddit.com/r/reactjs/comments/efjgfc/)
+
 [useEffect vs useLayoutEffect](https://kentcdodds.com/blog/useeffect-vs-uselayouteffect)
+
 [use React.memo wisely](https://dmitripavlutin.com/use-react-memo-wisely/)
+
 [Q: When should you NOT use React memo?](https://github.com/facebook/react/issues/14463)
+
 [shallowEqual function](https://github.com/facebook/react/blob/master/packages/shared/shallowEqual.js)
+
 [Code splitting - What, When and Why](https://dev.to/thekashey/code-splitting-what-when-and-why-59op)
+
 [What the heck is this in React ? 🥁🥁(Suspense)](https://itnext.io/what-the-heck-is-this-in-react-suspense-c5e641e487a)
+
 [Lazy loading (and preloading) components in React 16.6](https://medium.com/hackernoon/lazy-loading-and-preloading-components-in-react-16-6-804de091c82d)
+
 [Concurrent mode - Suspense](https://reactjs.org/docs/concurrent-mode-suspense.html)
+
 [Unused files webpack plugin](https://www.npmjs.com/package/unused-files-webpack-plugin)
+
 [Unused webpack plugin](https://www.npmjs.com/package/unused-webpack-plugin)
+
 [React Profiler](https://reactjs.org/docs/profiler.html)
