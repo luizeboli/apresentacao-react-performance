@@ -118,7 +118,7 @@ Como o useEffect é executado de forma assíncrona e após o browser renderizar 
 
 É preciso tomar cuidado ao utilizar esse hook, pois como ele executa de maneira síncrona, o browser fica bloqueado até o hook terminar sua execução, o que também pode causar problemas de performance
 
-> Exemplo do useLayoutEffect: https://codesandbox.io/s/use-layout-effect-gp14t
+> Exemplo do useLayoutEffect: https://codesandbox.io/s/use-layout-effect-forked-fgbv4
 
 ### React.memo
 
@@ -268,9 +268,7 @@ Isso significa:
 
 ## Otimizações
 
-Google Analytics
-
-> Roteiro: dar alguns exemplos de ferramentas que podem ser utilizadas para mensurar a performance, assim como dicas de otimização.
+> Roteiro: Unused files, Profiler, Analytics
 
 > Falar do Profiler do React e sua api de tracing (experimental), o quanto pode ser interessante para mensurar timings (o que o Wesley está fazendo através do GA)
 
@@ -295,7 +293,3 @@ Links utilizados como referência para a construção e estudo do tema.
 [Unused files webpack plugin](https://www.npmjs.com/package/unused-files-webpack-plugin)
 [Unused webpack plugin](https://www.npmjs.com/package/unused-webpack-plugin)
 [React Profiler](https://reactjs.org/docs/profiler.html)
-
-## ETC...
-
-> Bonus: optimistic UI
