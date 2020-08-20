@@ -1,4 +1,7 @@
 ![Language badge](https://img.shields.io/badge/Language-PT--BR-blue)
+
+> This is a workshop about performance in React, made to the mentorship program.
+
 # React: Aplicações mais performáticas, menos problemáticas.
 
 O intuito da apresentação é explicar alguns conceitos e como podemos mensurar e identificar problemas de performance.
